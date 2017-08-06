@@ -10,7 +10,7 @@ import {SelectItem} from "primeng/components/common/selectitem";
     styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-    private playerInfo: Player;
+    public playerInfo: Player;
     private playerOptions: SelectItem[];
     private selectedPlayer: Player;
     constructor(private matchesService: MatchesService,

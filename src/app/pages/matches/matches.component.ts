@@ -12,8 +12,8 @@ import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
     styleUrls: ['./matches.component.css']
 })
 export class MatchesComponent implements OnInit {
-    private matches: Array<Match>;
-    private players: Array<Player>;
+    public matches: Array<Match>;
+    public players: Array<Player>;
     private new_match: Match = new Match;
     private options: SelectItem[];
     private winPlayerOptions: SelectItem[];

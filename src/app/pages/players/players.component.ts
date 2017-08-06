@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-    private players: Array<Player>;
+    public players: Array<Player>;
     constructor(private matchesService: MatchesService,
                 private router: Router) { }
 

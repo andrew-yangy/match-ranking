@@ -1,0 +1,61 @@
+<p-dataTable [value]="matches" styleClass="match-table">
+    <p-column field="m_id" header="Match ID" [style]="{'width':'5%'}"></p-column>
+    <p-column field="w_team" header="Winning Team">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            <div *ngFor="let one of row[col.field]">{{one.name}}</div>
+        </ng-template>
+    </p-column>
+    <p-column field="l_team" header="Losing Team">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            <div *ngFor="let one of row[col.field]">{{one.name}}</div>
+        </ng-template>
+    </p-column>
+    <p-column field="date" header="Date">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            {{row.date | date :'medium'}}
+        </ng-template>
+    </p-column>
+</p-dataTable>
+<button class="btn btn-primary" (click)="openAdd()" *ngIf="!display">Add New Match</button>
+<div *ngIf="display">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                Match ID:
+            </div>
+            <div class="ui-grid-col-6">
+                {{new_match.m_id}}
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                Winning Team *:
+            </div>
+            <div class="ui-grid-col-6">
+                <p-multiSelect [options]="winPlayerOptions" [(ngModel)]="new_match.w_team" (onChange)="selectWin($event)"></p-multiSelect>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!new_match.w_team&&submitted">
+                    <i class="fa fa-close"></i>
+                    Winning Team is required
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                Losing Team *:
+            </div>
+            <div class="ui-grid-col-6">
+                <p-multiSelect [options]="losePlayerOptions" [(ngModel)]="new_match.l_team" (onChange)="selectLose($event)"></p-multiSelect>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!new_match.l_team&&submitted">
+                    <i class="fa fa-close"></i>
+                    Losing Team is required
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-default" (click)="cancel()">Cancel</button>
+    <button class="btn btn-primary" (click)="submitNewMatch()">Confirm</button>
+</div>

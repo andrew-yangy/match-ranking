@@ -1,0 +1,56 @@
+<div class="panel panel-info" *ngIf="playerInfo">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{playerInfo.name}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>ID:</td>
+                    <td>{{playerInfo.p_id}}</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>{{playerInfo.name}}</td>
+                </tr>
+                <tr>
+                    <td>Winning games:</td>
+                    <td>
+                        <div class="alert alert-success" *ngFor="let one of playerInfo.matches[0]">
+                            <div>Match ID : {{one.m_id}}</div>
+                            <div>Match Type ： {{one.w_team.length}} v {{one.l_team.length}}</div>
+                            <div>Winning Team : <span *ngFor="let p of one.w_team"> {{p.name}} </span></div>
+                            <div>Losing Team : <span *ngFor="let p of one.l_team"> {{p.name}} </span></div>
+                            <div>Match date : {{one.date | date:'medium'}}</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Losing games:</td>
+                    <td>
+                        <div class="alert alert-danger" *ngFor="let one of playerInfo.matches[1]">
+                            <div>Match ID : {{one.m_id}}</div>
+                            <div>Match Type ： {{one.w_team.length}} v {{one.l_team.length}}</div>
+                            <div>Winning Team : <span *ngFor="let p of one.w_team"> {{p.name}} </span></div>
+                            <div>Losing Team : <span *ngFor="let p of one.l_team"> {{p.name}} </span></div>
+                            <div>Match date : {{one.date | date:'medium'}}</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Win Rate %</td>
+                    <td>{{playerInfo.rates | percent:'.0-2'}}</td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div class="col-md-4">
+                Check Win Rate against <p-dropdown [options]="playerOptions" [(ngModel)]="selectedPlayer" [style]="{'width':'150px'}"></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                {{calRate() | percent:'.0-2'}}
+            </div>
+        </div>
+    </div>
+</div>

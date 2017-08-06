@@ -1,0 +1,16 @@
+<p-dataTable [value]="players" styleClass="match-table" selectionMode="single" (onRowSelect)="goToDetail($event)">
+    <p-column field="p_id" header="Player ID" [style]="{'width':'5%'}"></p-column>
+    <p-column field="name" header="Name"></p-column>
+    <p-column field="rates" header="Win Rate %">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            <span>{{row.rates | percent:'.0-2'}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="matches" header="Matches">
+        <ng-template let-col let-row="rowData" pTemplate="body">
+            <div *ngFor="let one of row.matches[0]" class="text-success">ID: {{one.m_id}}, date: {{one.date | date:'medium'}}</div>
+            <div *ngFor="let one of row.matches[1]" class="text-danger">ID: {{one.m_id}}, date: {{one.date | date:'medium'}}</div>
+        </ng-template>
+    </p-column>
+</p-dataTable>
+
